@@ -40,6 +40,9 @@ app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/skill", skillRouter);
 app.use("/api/v1/softwareapplication", softwareApplicationRouter);
 app.use("/api/v1/project", projectRouter);
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
 
 dbConnection();
 app.use(errorMiddleware);
