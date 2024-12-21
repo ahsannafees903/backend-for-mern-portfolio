@@ -5,8 +5,10 @@ export const generateToken = (user, message, statusCode, res) => {
   res
     .status(statusCode)
     .cookie("token", token, {
-      expires: new Date(Date.now() + cookieExpiresInDays * 24 * 60 * 60 * 1000), // Set cookie expiration
+      expires: new Date(Date.now() + cookieExpiresInDays * 24 * 60 * 60 * 1000),
       httpOnly: true, // Protect cookie from client-side access
+      secure: process.env.NODE_ENV === "production", // Ensure secure cookies in production
+      sameSite: "none", // Required for cross-origin requests
     })
     .json({
       success: true,
